@@ -1,4 +1,4 @@
-# plaintextToCue 
+# plainTextToCue 
  plainTextToCue v 0.1
  
  Sometimes you can run into a long track which has a list of titles available but you need to make a cue sheet by hand to split it into separate MP3 files.

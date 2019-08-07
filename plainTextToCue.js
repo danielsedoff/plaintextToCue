@@ -13,7 +13,7 @@ var contactInfo = "github.com/danielsedoff/plaintextToCue";
 
 plainTextToCue = function(list) {
   //start by making the filename header
-  result = "FILE \"file.mp3\" MP3";
+  result = "FILE \"file.mp3\" MP3\n";
   list = list.replace(/\r\n|\n\r|\r/g, "\n")
   list = list.split("\n");
 
@@ -36,7 +36,7 @@ plainTextToCue = function(list) {
       time = time2[0];
     }
 
-    if (time3.length > 0) {
+    if (null != time3) {
       // In the CUE format, 01:01:01 means 01 min 01 s + 0.01 s
       time = time3[0];
       let hrs = time.substring(0, 2),

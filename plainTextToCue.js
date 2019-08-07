@@ -11,7 +11,7 @@
 
 var contactInfo = "github.com/danielsedoff/plaintextToCue";
 
-plaintextToCue = function(list) {
+plainTextToCue = function(list) {
   //start by making the filename header
   result = "FILE \"file.mp3\" MP3";
   list = list.replace(/\r\n|\n\r|\r/g, "\n")
@@ -96,4 +96,4 @@ if (process.argv.length < 3) {
 
 textFile = process.argv[2];
 
-console.log(plaintextToCue(readFile(textFile)));
+console.log(plainTextToCue(readFile(textFile)));

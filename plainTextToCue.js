@@ -1,19 +1,17 @@
 /* plainTextToCue v 0.1
- * Converts generic text file to an MP3 cue file.
- * Needs Node.js to run.
- * USAGE:
- *
- * node plainTextToCue.js mytextfile.txt > mycuefile.cue
- *
+ * Converts a generic plain text tracklist to a .cue file
  * author: danielsedoff@gmail.com
  * github.com/danielsedoff
  */
 
-var contactInfo = "github.com/danielsedoff/plaintextToCue";
+var getElemVal = function(id){
+    elem = document.getElementById(id);
+    return elem.value;
+};
 
-plainTextToCue = function(list) {
+var plainTextToCue = function(filename, list) {
   //start by making the filename header
-  result = "FILE \"file.mp3\" MP3\n";
+  result = "FILE \"" + filename + "\"\n";
   list = list.replace(/\r\n|\n\r|\r/g, "\n")
   list = list.split("\n");
 
@@ -65,7 +63,7 @@ plainTextToCue = function(list) {
   return result;
 };
 
-track = {
+var track = {
   trackhead: function(num) {
     if (Number(num) < 10) num = "0".concat(num);
     return "  TRACK " + num + " AUDIO" + "\n";
@@ -78,22 +76,19 @@ track = {
   }
 };
 
-readFile = function(filename) {
-  var fs = require("fs");
-  try {
-    var result = fs.readFileSync(filename, "utf8");
-  } catch (e) {
-    console.log("Error:", e.stack);
-  }
-  return result;
+var downloadFile= function(){
+    filename = getElemVal("inputFileName") + ".cue";
+    text = getElemVal("outputText");
+    
+    blob = new Blob([text], { type: 'text/plain' }),
+    anchor = document.createElement('a');
+    anchor.download = filename;
+    anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
+    anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
+    anchor.click();
 };
 
-// the entry point
-if (process.argv.length < 3) {
-  console.log("plainTextToCue: no file provided. " + contactInfo);
-  return;
-}
-
-textFile = process.argv[2];
-
-console.log(plainTextToCue(readFile(textFile)));
+var processText = function(){
+    result =  plainTextToCue(getElemVal("inputFileName"), getElemVal("inputText"));
+    document.getElementById("outputText").value = result;
+};

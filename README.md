@@ -1,7 +1,7 @@
 # plainTextToCue 
  plainTextToCue v 0.1
  
- This script converts plain text files with HH:MM:SS or MM:SS track start times to a .cue file.
+ This small html/javascript page converts plain text files with HH:MM:SS or MM:SS track start times to a .cue file.
 
  An example of a plain text tracklist:
 
